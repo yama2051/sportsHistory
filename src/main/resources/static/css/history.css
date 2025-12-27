@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+.timeline-country {
+  height: 400px; /* 縦の表示枠を固定 */
+  overflow-y: scroll; /* 縦スクロールを有効にする */
+  padding-left: 20px;
+  background-color: #f9f9f9;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  border-left: 2px solid #007bff; /* 左側の縦線 */
+  margin-left: 20px;
+  padding-left: 20px;
+  
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline-item::before {
+  display: none;
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: #333;
+  border-radius: 50%;
+  position: absolute;
+  left: -12px;
+  top: 5px;
+  
+  content: '';
+  position: absolute;
+  left: -31px; /* 線の真上にくるように調整 */
+  width: 20px;
+  height: 20px;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+
+.year {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.event {
+  margin-top: 5px;
+}
+
+/*詳細画面用*/
+.detail {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #eef;
+  border-left: 3px solid #88c;
+  display: none;
+}
+
+.detail.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.tab-button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #eef;
+  border: 1px solid #88c;
+  cursor: pointer;
+  font-weight: bold;
+}
+.tab-button.active {
+  background-color: #88c;
+  color: white;
+}
+
+/*フィルター機能*/
+.filter-container {
+  margin: 10px 0;
+}
+#keywordInput {
+  padding: 6px;
+  width: 60%;
+  font-size: 1em;
+}
+

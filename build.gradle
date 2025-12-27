@@ -1,0 +1,74 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.5' // ★修正: バージョンを3.2.5に戻します。
+	id 'io.spring.dependency-management' version '1.1.5' // ★修正: バージョンを1.1.5に戻します。
+	id 'war' // ★追加: WARファイルを生成するため
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17) // ★修正: Java 17 に戻します
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+// ext { // Spring AIを使わないなら不要なのでコメントアウトまたは削除
+// 	set('springAiVersion', "1.0.0")
+// }
+
+dependencies {
+	// ★既存の依存関係はプロジェクトの要件に合わせて残すか削除してください
+	// ★JSPとMyBatisに焦点を当てるなら、JPAやThymeleafは不要かもしれません。
+	//   今回はJSPとMyBatisに必要なものを追加します。
+
+	implementation 'org.springframework.boot:spring-boot-starter-web' // Web機能
+	
+	// JSPを有効にするために必要
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // JSPコンパイル用
+	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api' // JSTL API
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl' // JSTL実装
+
+	// MyBatis Spring Boot Starter ★追加
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3' // Spring Boot 3.2.5 と互換性のあるバージョン
+
+	// データベースドライバ (PostgreSQLを使うのでこれは残します)
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// Lombok (使用するなら残す)
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// 開発ツール (使用するなら残す)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// テスト関連 (使用するなら残す)
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// WARパッケージング時に外部Tomcatにデプロイする場合に指定
+	// 組み込みTomcatでspring-boot:runするだけなら必須ではありませんが、つけても問題ありません
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' 
+}
+
+// Spring AIを使わないなら不要なのでコメントアウトまたは削除
+// dependencyManagement {
+// 	imports {
+// 		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+// 	}
+// }
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

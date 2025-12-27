@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sportsHistry.repository.SportsNameMapper">
+    <resultMap id="sportResultMap" type="com.example.sportsHistry.model.SportsNameEntity">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="pathUrl" column="path_url"/>
+        <result property="highlight" column="is_higthlight"/>
+        <result property="comment" column="comment"/> 
+    </resultMap>
+
+<select id="selectSportsName" resultMap="sportResultMap">
+ SELECT id, name, path_url,is_higthlight,comment FROM sports WHERE name ILIKE #{sportName} LIMIT 1 
+ </select>
+ 
+ <!--注目スポーツを取得する-->
+ <select id="selectTodaysSports" resultMap="sportResultMap">
+ 	SELECT * FROM sports WHERE is_higthlight = true ORDER BY RANDOM() LIMIT 1;
+ </select>
+	
+</mapper>
