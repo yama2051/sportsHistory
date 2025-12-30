@@ -69,9 +69,9 @@ public class topPageController {
         model.addAttribute("sportsName", dbSportsName); 
         
         //参照ページ用
-        PageUrlEntity pageUrlDto = timeLineService.getReferencePage();
+        List<PageUrlEntity> pageUrlDto = timeLineService.getReferencePage(sportsCode);
         
-        model.addAttribute("pageUrl",pageUrlDto);
+        model.addAttribute("pageUrlList",pageUrlDto);
         
         // スポーツの種類に応じて異なるJSPを返す
         if ("野球".equals(dbSportsName)) {

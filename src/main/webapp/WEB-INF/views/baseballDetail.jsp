@@ -55,13 +55,11 @@
 	<section id="reference-section">
 		<h3>【参考ページ先】</h3>
 		<ul>
-			<li>
-				<a href="https://example.com/baseball-history" target="_blank" rel="noopener noreferrer">日本野球機構（NPB）- 野球の歴史</a>
-			</li>
-			<li>
-				<a href="${pageUrl.pageUrl}" target="_blank" rel="noopener noreferrer">
-                        ${pageUrl.pageName}</a>
-			</li>
+			<c:forEach var="ref" items="${pageUrlList}">
+    			<li>
+        			<a href="${ref.pageUrl}" target="_blank">${ref.pageName}</a>
+    			</li>
+			</c:forEach>
 		</ul>
 	</section>
 

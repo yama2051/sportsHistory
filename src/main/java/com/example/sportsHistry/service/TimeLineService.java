@@ -41,9 +41,9 @@ public class TimeLineService {
     }
     
     //参考ページの取得
-    public PageUrlEntity getReferencePage() {
-    	PageUrlEntity pageUrlDto;
-    	pageUrlDto = pageUrlMapper.findUrlPage();
+    public List<PageUrlEntity> getReferencePage(String sportsCode) {
+    	List<PageUrlEntity> pageUrlDto;
+    	pageUrlDto = pageUrlMapper.findUrlPage(sportsCode);
 		return pageUrlDto;
     	
     	
