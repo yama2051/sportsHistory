@@ -4,7 +4,7 @@
   height: 400px; /* 縦の表示枠を固定 */
   overflow-y: scroll; /* 縦スクロールを有効にする */
   padding-left: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
 }
 
 .timeline {
@@ -12,15 +12,19 @@
   flex-direction: column;
   gap: 20px;
   position: relative;
-  border-left: 2px solid #007bff; /* 左側の縦線 */
+  border-left: 2px solid var(--accent-color); 
   margin-left: 20px;
   padding-left: 20px;
+  color:var(--text-color);
+  
   
 }
 
 .timeline-item {
   position: relative;
   padding-left: 20px;
+  color:var(--text-color);
+
 }
 
 .timeline-item::before {
@@ -45,7 +49,7 @@
 
 .year {
   font-weight: bold;
-  color: #2c3e50;
+  color: var(--accent-color);
 }
 
 .event {
@@ -56,9 +60,11 @@
 .detail {
   margin-top: 10px;
   padding: 10px;
-  background-color: #eef;
+  background-color:var(--card-bg);
   border-left: 3px solid #88c;
   display: none;
+  color: var(--text-color);
+  border: 1px solid #444;
 }
 
 .detail.visible {

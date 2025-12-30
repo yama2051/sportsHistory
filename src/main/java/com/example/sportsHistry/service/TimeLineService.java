@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.sportsHistry.model.PageUrlEntity;
 import com.example.sportsHistry.model.TimeLineEvent;
+import com.example.sportsHistry.repository.PageUrlMapper;
 import com.example.sportsHistry.repository.TimeLineMapper;
 
 @Service
 public class TimeLineService {
 	@Autowired
 	private TimeLineMapper timeLineMapper;
+	@Autowired
+	private PageUrlMapper pageUrlMapper;
 	
 	public List<TimeLineEvent> getEvents(String country, Integer startYear, Integer endYear) {
 	    return timeLineMapper.selectTimeLine(country, startYear, endYear);
@@ -34,6 +38,15 @@ public class TimeLineService {
     	timeLineDto = timeLineMapper.findBySports(sports);
     	
         return timeLineDto;
+    }
+    
+    //参考ページの取得
+    public PageUrlEntity getReferencePage() {
+    	PageUrlEntity pageUrlDto;
+    	pageUrlDto = pageUrlMapper.findUrlPage();
+		return pageUrlDto;
+    	
+    	
     }
     
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.sportsHistry.model.PageUrlEntity;
 import com.example.sportsHistry.model.SportsNameDTO;
 import com.example.sportsHistry.model.SportsNameForm;
 import com.example.sportsHistry.model.TimeLineEvent;
@@ -25,6 +26,7 @@ public class topPageController {
 	
 	@Autowired
 	private SportsNameService sportsNameService;
+
 	
 	//topPageを開く
 	@SuppressWarnings("null")
@@ -65,7 +67,12 @@ public class topPageController {
         model.addAttribute("events", timeline);
         model.addAttribute("country", defaultCountry);
         model.addAttribute("sportsName", dbSportsName); 
-
+        
+        //参照ページ用
+        PageUrlEntity pageUrlDto = timeLineService.getReferencePage();
+        
+        model.addAttribute("pageUrl",pageUrlDto);
+        
         // スポーツの種類に応じて異なるJSPを返す
         if ("野球".equals(dbSportsName)) {
             return "baseballDetail"; 

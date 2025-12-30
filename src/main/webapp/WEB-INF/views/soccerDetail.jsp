@@ -54,5 +54,6 @@
 		<a href="${pageContext.request.contextPath}/" class="btn">トップページへ</a>
 	</footer>
 <script src="<%= request.getContextPath() %>/js/timeline.js"></script>
+<script src="${pageContext.request.contextPath}/js/theme.js" defer></script>
 </body>
 </html>

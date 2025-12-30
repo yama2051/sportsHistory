@@ -4,7 +4,11 @@
         font-family: sans-serif;
         text-align: center;
         padding: 50px;
+		background-color:var(--bg-color) ;
+		color: var(--text-color);
+		transition: background-color 0.3s, color 0.3s;
     }
+	
     h1 {
         color: darkblue;
     }
@@ -36,6 +40,7 @@
 	    background: #FFF;
 	    border: solid 3px #0056b3;/*線*/
 	    border-radius: 10px;/*角の丸み*/
+		background-color: var(--card-bg);
 	}
 	
 	.sportsBtn{
@@ -99,4 +104,25 @@
 	        width: 750px; /* タブレット向けに調整 */
 	    }
 	    /* 必要に応じてスタイルを調整 */
+	}
+	
+	/*ダークモードの実装*/
+	/*通常時の色*/
+	:root{
+		--bg-color:#ffffff;
+		--text-color:#333333;
+		--card-bg: #f8f9fa;
+		--accent-color: #007bff;
+	}
+	
+	/* ダークモード時の色設定 */
+	[data-theme='dark'] {
+	    --bg-color: #121212;      /* 背景：ほぼ黒 */
+	    --text-color: #e0e0e0;    /* 文字：明るいグレー */
+	    --card-bg: #1e1e1e;       /* カード背景：濃いグレー */
+	    --accent-color: #379aff;  /* アクセント：少し明るい青 */
+	}
+	
+	li{
+		list-style:none;
 	}

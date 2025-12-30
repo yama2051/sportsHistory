@@ -23,4 +23,6 @@ public class BaseballDetailController {
         model.addAttribute("country", country);
         return "baseballDetail";  // baseballDetail.jspを返す想定
 	}
+	
+	
 }

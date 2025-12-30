@@ -17,5 +17,7 @@
         
         <a href="${pageContext.request.contextPath}/" class="btn">トップページへ戻る</a>
 	</div>
+	
+	<script src="${pageContext.request.contextPath}/js/theme.js" defer></script>
 </body>
 </html>

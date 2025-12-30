@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="jakarta.tags.core" prefix="c" %>  <%-- ★この行を追加 --%>
+    <%@ taglib uri="jakarta.tags.core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,10 +51,24 @@
 	<div>
 		<h2>類似競技</h2>
 	</div>
+	
+	<section id="reference-section">
+		<h3>【参考ページ先】</h3>
+		<ul>
+			<li>
+				<a href="https://example.com/baseball-history" target="_blank" rel="noopener noreferrer">日本野球機構（NPB）- 野球の歴史</a>
+			</li>
+			<li>
+				<a href="${pageUrl.pageUrl}" target="_blank" rel="noopener noreferrer">
+                        ${pageUrl.pageName}</a>
+			</li>
+		</ul>
+	</section>
 
 	<footer>
 		<a href="${pageContext.request.contextPath}/" class="btn">トップページへ</a>
 	</footer>
 <script src="<%= request.getContextPath() %>/js/timeline.js"></script>
+<script src="${pageContext.request.contextPath}/js/theme.js" defer></script>
 </body>
 </html>

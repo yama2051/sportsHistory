@@ -11,6 +11,7 @@
 <body>
 <header>
     <h1>スポーツの歴史を学ぼう！</h1>
+    <button id="theme-toggle">ダークモードへの切り替え</button>
     <p>このサイトでは、さまざまなスポーツの起源や歴史を簡単に学べます。</p>
 </header>
 
@@ -252,7 +253,9 @@
 	 <li>
 	 	<a href="#">4</a>
 	 </li>
-	</ul>    
+	</ul> 
+	
+<script src="${pageContext.request.contextPath}/js/theme.js" defer></script>
     
 </body>
 </html>
