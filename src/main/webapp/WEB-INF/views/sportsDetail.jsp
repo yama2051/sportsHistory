@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>野球の歴史</title>
+<title>${sportsName}の歴史</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/common.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/history.css">
 </head>
 
 <body>
 	<header>
-		<h1>野球の歴史 🏛</h1>
+		<h1>${sportsName}の歴史 🏛</h1>
 		<p>ここでは野球の歴史について年表形式で学ぶことができます。</p>
 	</header>
 
@@ -21,13 +21,16 @@
     <a href="${pageContext.request.contextPath}/detail/baseball/japan">
         <button class="tab-button ${country == 'japan' ? 'active' : ''}">日本🗾</button>
     </a>
-    <a href="${pageContext.request.contextPath}/detail/baseball/usa"> <button class="tab-button ${country == 'United States' ? 'active' : ''}">アメリカ🗽</button>
+    
+    <a href="${pageContext.request.contextPath}/detail/baseball/america"> 
+        <button class="tab-button ${country == 'america' ? 'active' : ''}">アメリカ🗽</button>
     </a>
-    <a href="${pageContext.request.contextPath}/detail/baseball/korea"> <button class="tab-button ${country == 'South Korea' ? 'active' : ''}">韓国</button>
+    
+    <a href="${pageContext.request.contextPath}/detail/baseball/korea"> 
+        <button class="tab-button ${country == 'korea' ? 'active' : ''}">韓国</button>
     </a>
 </div>
 
-	<!-- キーワード検索（※今回は機能しません。JavaScriptが必要） -->
 	<div class="filter-container">
 		<label for="keywordInput">🔍 キーワード検索：</label>
 		<input type="text" id="keywordInput" onkeyup="filterTimeline()" placeholder="例：WBC、プロ野球 など">
@@ -46,10 +49,6 @@
 				</div>
 			</c:forEach>
 		</div>
-	</div>
-	
-	<div>
-		<h2>類似競技</h2>
 	</div>
 	
 	<section id="reference-section">

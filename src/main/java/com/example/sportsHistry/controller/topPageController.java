@@ -54,7 +54,7 @@ public class topPageController {
 	
 	//初期表示で日本の年表を表示
 	@GetMapping("/detail/{sportsCode}")
-	public String showBaseballDetail(@PathVariable String sportsCode, Model model) {
+	public String showBaseballDetail(@PathVariable String sportsCode,String country, Model model) {
 		//defaule japan
 		//初期表示で日本の年表を表示する
 		String defaultCountry ="japan";
@@ -69,18 +69,16 @@ public class topPageController {
         model.addAttribute("sportsName", dbSportsName); 
         
         //参照ページ用
-        List<PageUrlEntity> pageUrlDto = timeLineService.getReferencePage(sportsCode);
+        List<PageUrlEntity> pageUrlDto = timeLineService.getReferencePage(sportsCode,defaultCountry);
         
         model.addAttribute("pageUrlList",pageUrlDto);
         
-        // スポーツの種類に応じて異なるJSPを返す
-        if ("野球".equals(dbSportsName)) {
-            return "baseballDetail"; 
-        } else if ("サッカー".equals(dbSportsName)) {
-            return "soccerDetail"; 
+        if(dbSportsName == null || dbSportsName.isEmpty()) {
+            //error
+            return "errorPage"; 
+        }else {
+        	return "sportsDetail";
         }
-        //error
-        return "errorPage"; 
 		
 	}
 	
@@ -89,10 +87,16 @@ public class topPageController {
 	        String dbSportsName = convertSportsCodeToDbSportsName(sportsCode);
 	        String dbCountryName = convertCountryCodeToDbCountryName(countryCode); // 国コード変換メソッドを呼び出し
 
+	        String defaultCountry = "japan";
 	        // 未知のスポーツコードまたは国コードの場合のハンドリング
 	        if (dbSportsName == null || dbCountryName == null) {
 	            return "redirect:/"; // トップページへリダイレクト
 	        }
+	        
+	     // ★ ここを追加：国コードに基づいた参照ページを取得
+	        List<PageUrlEntity> pageUrlDto = timeLineService.getReferencePage(sportsCode, dbCountryName);
+	        model.addAttribute("pageUrlList", pageUrlDto);
+	        model.addAttribute("sportsCode", sportsCode);
 
 	        // 年表データ取得
 	        List<TimeLineEvent> timeline = timeLineService.getByCountryAndSports(dbCountryName, dbSportsName);
@@ -100,14 +104,13 @@ public class topPageController {
 	        model.addAttribute("events", timeline);
 	        model.addAttribute("country", dbCountryName); // JSPにDBの国名を渡す
 	        model.addAttribute("sportsName", dbSportsName); // JSPにDBのスポーツ名を渡す
-
-	        if ("野球".equals(dbSportsName)) {
-	            return "baseballDetail"; 
-	        } else if ("サッカー".equals(dbSportsName)) {
-	            return "soccerDetail"; 
+	        
+	        if(dbSportsName == null || dbSportsName.isEmpty()) {
+	            //error
+	            return "errorPage"; 
+	        }else {
+	        	return "sportsDetail";
 	        }
-	        //error
-	        return "errorPage"; 
 	    }
 	
     /**
@@ -126,7 +129,7 @@ public class topPageController {
                 return "柔道";
             case "basketball":
                 return "バスケットボール"; 
-            case "swiming":
+            case "swwiming":
                 return "水泳";
             case "kendo":
                 return "剣道";
@@ -144,11 +147,12 @@ public class topPageController {
      * @return データベースに登録されている国名（例: "Japan", "United States"）、またはnull（変換できない場合）
      */
     private String convertCountryCodeToDbCountryName(String countryCode) {
-        switch (countryCode) {
+        switch (countryCode.toLowerCase()) {
             case "japan":
                 return "japan";
             case "usa":
-                return "usa";
+            case "america":
+                return "america";
             case "korea":
                 return "korea"; 
             default:
