@@ -73,6 +73,10 @@ public class topPageController {
         
         model.addAttribute("pageUrlList",pageUrlDto);
         
+        //カテゴリ用
+        List<PageUrlEntity> findReletedSports = timeLineService.getFindCategory(sportsCode);
+        model.addAttribute("relatedSports",findReletedSports);
+        
         if(dbSportsName == null || dbSportsName.isEmpty()) {
             //error
             return "errorPage"; 
@@ -87,7 +91,6 @@ public class topPageController {
 	        String dbSportsName = convertSportsCodeToDbSportsName(sportsCode);
 	        String dbCountryName = convertCountryCodeToDbCountryName(countryCode); // 国コード変換メソッドを呼び出し
 
-	        String defaultCountry = "japan";
 	        // 未知のスポーツコードまたは国コードの場合のハンドリング
 	        if (dbSportsName == null || dbCountryName == null) {
 	            return "redirect:/"; // トップページへリダイレクト
@@ -98,6 +101,10 @@ public class topPageController {
 	        model.addAttribute("pageUrlList", pageUrlDto);
 	        model.addAttribute("sportsCode", sportsCode);
 
+	        //カテゴリ用
+	        List<PageUrlEntity> findReletedSports = timeLineService.getFindCategory(sportsCode);
+	        model.addAttribute("relatedSports",findReletedSports);
+	        
 	        // 年表データ取得
 	        List<TimeLineEvent> timeline = timeLineService.getByCountryAndSports(dbCountryName, dbSportsName);
 

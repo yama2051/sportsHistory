@@ -49,4 +49,11 @@ public class TimeLineService {
     	
     }
     
+    //カテゴリ抽出
+    public List<PageUrlEntity> getFindCategory(String sportsCode){
+    	List<PageUrlEntity> pageUrlDto;
+    	pageUrlDto = pageUrlMapper.findCategory(sportsCode);
+    	return pageUrlDto;
+    }
+    
 }

@@ -51,6 +51,17 @@
 		</div>
 	</div>
 	
+	<section id="categorySports">
+		<h3>【同じカテゴリーのスポーツ】</h3>
+			<c:forEach var="categoryRef" items="${relatedSports}">
+    			<li>
+        			<a href="${pageContext.request.contextPath}/detail/${categoryRef.sportsName}">
+                    ${categoryRef.sportsName} </a>
+    			</li>
+			</c:forEach>
+	
+	</section>
+	
 	<section id="reference-section">
 		<h3>【参考ページ先】</h3>
 		<ul>
