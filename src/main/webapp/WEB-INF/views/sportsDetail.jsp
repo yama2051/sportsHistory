@@ -40,9 +40,9 @@
 	<div id="timeline-${country}" class="timeline-country">
 		<div class="timeline">
 			<c:forEach var="event" items="${events}">
-				<div class="timeline-item" onclick="toggleDetail(this)">
+				<div class="timeline-item ${event.important ? 'highlight':'' }" onclick="toggleDetail(this)">
 					<div class="year">${event.year}年</div>
-					<div class="event">${event.event}</div>
+					<div class="event"><c:if test="${event.important}">⭐</c:if> ${event.event}${event.event}</div>
 					<c:if test="${not empty event.detail}">
 						<div class="detail">${event.detail}</div>
 					</c:if>

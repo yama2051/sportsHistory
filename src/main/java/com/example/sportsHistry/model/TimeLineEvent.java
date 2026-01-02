@@ -8,6 +8,7 @@ public class TimeLineEvent {
     private String event;
     private String detail;
     private String sports;
+    private boolean important;
 
     //id
 	public int getId() {
@@ -50,6 +51,12 @@ public class TimeLineEvent {
 	}
 	public void setSports(String sports) {
 		this.sports = sports;
+	}
+	public boolean isImportant() {
+		return important;
+	}
+	public void setImportant(boolean important) {
+		this.important = important;
 	}
 
 }

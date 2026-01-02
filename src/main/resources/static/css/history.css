@@ -98,3 +98,37 @@
   font-size: 1em;
 }
 
+/* 重要項目のデザイン */
+.timeline-item.highlight {
+	/* 背景を塗りつぶさず、薄く色を乗せるだけにする（文字色を活かす） */
+	    background-color: rgba(251, 192, 45, 0.15) !important; 
+	    
+	    /* 枠線を少し太くして目立たせる */
+	    border: 2px solid #fbc02d !important;
+	    border-radius: 8px;
+	    padding: 10px;
+	    
+	    /* 外側に光を放つような影（グロー効果）をつけて特別感を出す */
+	    box-shadow: 0 0 12px rgba(251, 192, 45, 0.4);
+	    position: relative;
+	    
+	    /* 周りと同じ文字色（CSS変数）を使用 */
+	    color: var(--text-color) !important;
+}
+
+/* さらに特別感を出すために星マークを自動でつける（お好みで！） */
+.timeline-item.highlight::before {
+    content: "⭐";
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 2. 【重要】ハイライトの中の各要素の文字色を強制的に変える */
+.timeline-item.highlight .year,
+.timeline-item.highlight .event,
+.timeline-item.highlight .detail {
+    color: var(--text-color) !important;
+}
+

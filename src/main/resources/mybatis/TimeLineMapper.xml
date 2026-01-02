@@ -24,7 +24,7 @@
   </select>
   
      <select id="findByCountryAndSports" resultType="com.example.sportsHistry.model.TimeLineEvent">
-        SELECT id, country, year, event, detail, sports
+        SELECT id, country, year, event, detail, sports,is_important AS important
         FROM timeline_event
         WHERE country = #{country} AND sports = #{sports}
         ORDER BY year
@@ -34,5 +34,7 @@
     	SELECT * FROM timeline_event
     	WHERE sports = #{sports}
     </select>
+    
+
 
 </mapper>

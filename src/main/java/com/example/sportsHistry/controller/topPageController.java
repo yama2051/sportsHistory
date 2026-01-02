@@ -75,6 +75,20 @@ public class topPageController {
         
         //カテゴリ用
         List<PageUrlEntity> findReletedSports = timeLineService.getFindCategory(sportsCode);
+        
+        if (findReletedSports != null) {
+            for (PageUrlEntity entity : findReletedSports) {
+               
+                String englishName = entity.getSportsName();
+                // 和名変換
+                String japaneseName = convertSportsCodeToDbSportsName(englishName);
+                
+                // 変換できたら（nullじゃなければ）セットし直す
+                if (japaneseName != null) {
+                    entity.setSportsName(japaneseName);
+                }
+            }
+        }
         model.addAttribute("relatedSports",findReletedSports);
         
         if(dbSportsName == null || dbSportsName.isEmpty()) {
@@ -103,6 +117,20 @@ public class topPageController {
 
 	        //カテゴリ用
 	        List<PageUrlEntity> findReletedSports = timeLineService.getFindCategory(sportsCode);
+	        
+	        if (findReletedSports != null) {
+	            for (PageUrlEntity entity : findReletedSports) {
+	               
+	                String englishName = entity.getSportsName();
+	                // 和名変換
+	                String japaneseName = convertSportsCodeToDbSportsName(englishName);
+	                
+	                // 変換できたら（nullじゃなければ）セットし直す
+	                if (japaneseName != null) {
+	                    entity.setSportsName(japaneseName);
+	                }
+	            }
+	        }
 	        model.addAttribute("relatedSports",findReletedSports);
 	        
 	        // 年表データ取得
@@ -127,23 +155,212 @@ public class topPageController {
      * @return データベースに登録されているスポーツ名（例: "野球"）、またはnull（変換できない場合）
      */
     private String convertSportsCodeToDbSportsName(String sportsCode) {
-        switch (sportsCode) {
-            case "baseball":
-                return "野球"; 
-            case "soccer":
-                return "サッカー"; 
-            case "judo":
-                return "柔道";
-            case "basketball":
-                return "バスケットボール"; 
-            case "swwiming":
-                return "水泳";
-            case "kendo":
-                return "剣道";
-            case "wrestling":
-                return "レスリング";
-            default:
-                return null; // 未知のスポーツコード
+        if (sportsCode == null) return null;
+        
+        switch (sportsCode.toLowerCase()) {
+            // あ行
+            case "icehockey": return "アイスホッケー";
+            case "aquadance": return "アクアダンス";
+            case "americanfootball": return "アメリカンフットボール";
+            case "archery": return "アーチェリー";
+            case "armwrestling": return "アームレスリング";
+            case "iaido": return "居合道";
+            case "unicycle": return "一輪車";
+            case "indiaca": return "インディアカ";
+            case "windsurfing": return "ウィンドサーフィン";
+            case "waveski": return "ウェーブスキー";
+            case "weighttraining": return "ウエイトトレーニング";
+            case "weightlifting": return "ウエイトリフティング";
+            case "walkrally": return "ウォークラリー";
+            case "wallhandball": return "ウォールハンドボール";
+            case "walking": return "ウォーキング";
+            case "aerobic": return "エアロビック";
+            case "airsportshooting": return "エアースポーツシューティング";
+            case "eskitenis": return "エスキーテニス";
+            case "oztag": return "オズタグ";
+            case "orienteering": return "オリエンテーリング";
+            case "okgolf": return "オーケーゴルフ";
+            case "australianfootball": return "オーストラリアンフットボール";
+            case "autocamping": return "オートキャンプ";
+
+            // か行
+            case "canoe": return "カヌー";
+            case "kabaddi": return "カバディ";
+            case "karatedo": return "空手道";
+            case "kangaroocricket": return "カンガクリケット";
+            case "curling": return "カーリング";
+            case "balloon": return "気球";
+            case "qigong": return "気功";
+            case "kickbaseball": return "キックベースボール";
+            case "casting": return "キャスティング";
+            case "camp": return "キャンプ";
+            case "kyudo": return "弓道";
+            case "cricket": return "クリケット";
+            case "croquet": return "クロッケー";
+            case "crolity": return "クロリティー";
+            case "glider": return "グライダー";
+            case "groundgolf": return "グラウンド・ゴルフ";
+            case "grassski": return "グラススキー";
+            case "kenbiso": return "健美操";
+            case "gateball": return "ゲートボール";
+            case "korfball": return "コーフボール";
+            case "goalball": return "ゴールボール";
+
+            // さ行
+            case "cycling": return "サイクリング";
+            case "cyclesoccer": return "サイクルサッカー";
+            case "cyclefigure": return "サイクルフィギュア";
+            case "3btaisou": return "3B体操";
+            case "sambo": return "サンボ";
+            case "surfing": return "サーフィン";
+            case "shuttleball": return "シャトルボール";
+            case "shuffleboard": return "シャフルボード";
+            case "shootboxing": return "シュートボクシング";
+            case "shorinjikempo": return "少林寺拳法";
+            case "shorttennis": return "ショートテニス";
+            case "shorttrack": return "ショートトラック";
+            case "shintakkyu": return "新卓球";
+            case "jetsports": return "ジェットスポーツ";
+            case "jikyojustsu": return "自彊術";
+            case "jazztymnastics": return "ジャズ体操";
+            case "jazzdance": return "ジャズダンス";
+            case "joyathlon": return "ジョイアスロン";
+            case "jogging": return "ジョギング";
+            case "waterpolo": return "水球";
+            case "waterski": return "水上スキー";
+            case "skydive": return "スカイダイビング";
+            case "squash": return "スカッシュ";
+            case "ski": return "スキー";
+            case "scubadiving": return "スクーバダイビング";
+            case "skateboard": return "スケートボード";
+            case "streetbasket": return "3x3";
+            case "snowboard": return "スノーボード";
+            case "snowmobile": return "スノーモービル";
+            case "speedskate": return "スピードスケート";
+            case "sports-onigokko": return "スポーツ鬼ごっこ";
+            case "sportskite": return "スポーツカイト";
+            case "sportsdiving": return "スポーツダイビング";
+            case "sportschanbara": return "スポーツチャンバラ";
+            case "snowballfight": return "スポーツ雪合戦";
+            case "spaulbourg": return "スポールブール";
+            case "sumo": return "相撲";
+            case "sailtraining": return "セイルトレーニング";
+            case "sepaktakraw": return "セパタクロー";
+            case "sailing": return "セーリング";
+            case "softvolleyball": return "ソフトバレーボール";
+            case "softball": return "ソフトボール";
+            case "songleading": return "チアダンス";
+
+            // た行
+            case "taspony": return "タスポニー";
+            case "touchfootball": return "タッチフットボール";
+            case "touchrugby": return "タッチラグビー";
+            case "targetbirdgolf": return "ターゲット・バードゴルフ";
+            case "doubledutch": return "ダブルダッチ";
+            case "dancesports": return "ダンススポーツ";
+            case "darts": return "ダーツ";
+            case "tschoukball": return "チュックボール";
+            case "tugofwar": return "綱引競技";
+            case "fishing": return "釣り";
+            case "teeball": return "ティーボール";
+            case "duathlon": return "デュアスロン";
+            case "denmarktymnastics": return "デンマーク体操";
+            case "tossbaseball": return "トスベースボール";
+            case "triathlon": return "トライアスロン";
+            case "trampolinebics": return "トランポビクス";
+            case "trampoline": return "トランポリン";
+            case "trittball": return "トリットボール";
+            case "trekking": return "トレッキング";
+            case "dodgeball": return "ドッジボール";
+            case "dragonboat": return "ドラゴンボート";
+
+            // な・は行
+            case "naginata": return "なぎなた";
+            case "nastarrace": return "ナスターレース";
+            case "jumprope": return "なわとび";
+            case "netball": return "ネットボール";
+            case "hiking": return "ハイキング";
+            case "hanggliding": return "ハンググライディング";
+            case "handball": return "ハンドボール";
+            case "bmx": return "BMX";
+            case "boundtennis": return "バウンドテニス";
+            case "equestrian": return "馬術";
+            case "batontwirling": return "バトントワリング";
+            case "pattpatgolf": return "パットパットゴルフ";
+            case "paddletennis": return "パドルテニス";
+            case "paragliding": return "パラグライディング";
+            case "parachutesports": return "パラシュートスポーツ";
+            case "powerlifting": return "パワーリフティング";
+            case "parkgolf": return "パークゴルフ";
+            case "billiards": return "ビリヤード";
+            case "beachsoccer": return "ビーチサッカー";
+            case "beachvolleyball": return "ビーチバレーボール";
+            case "beachfootball": return "ビーチフットボール";
+            case "beachball": return "ビーチボール";
+            case "faustball": return "ファウストボール";
+            case "figureskate": return "フィギュアスケート";
+            case "finswimming": return "フィンスイミング";
+            case "fencing": return "フェンシング";
+            case "folkdance": return "フォークダンス";
+            case "futsal": return "フットサル";
+            case "footbag": return "フットバッグ";
+            case "flyingdisc": return "フライングディスク";
+            case "flagfootball": return "フラッグフットボール";
+            case "frisbeedog": return "フリスビードッグ";
+            case "freetennis": return "フリーテニス";
+            case "floorhockey": return "フロアホッケー";
+            case "bujuttaikyokuken": return "武術太極拳";
+            case "broomball": return "ブルームボール";
+            case "boomerang": return "ブーメラン";
+            case "pencaksilat": return "プンチャック・シラット";
+            case "petanque": return "ペタンク";
+            case "hosteling": return "ホステリング";
+            case "hockey": return "ホッケー";
+            case "horseshoes": return "ホースシューズ";
+            case "bowling": return "ボウリング";
+            case "boccia": return "ボッチャ";
+            case "bodybuilding": return "ボディビル";
+            case "bodyboard": return "ボディボード";
+            case "boat": return "ボート";
+            case "polo": return "ポロ";
+
+            // ま・や・ら・わ行
+            case "microlightplane": return "マイクロライトプレーン";
+            case "mountainbike": return "マウンテンバイク";
+            case "makkoh": return "真向法";
+            case "malletgolf": return "マレットゴルフ";
+            case "motorcyclesports": return "モーターサイクル";
+            case "unicurl": return "ユニカール";
+            case "unihoc": return "ユニホック";
+            case "lifesaving": return "ライフセービング";
+            case "lacrosse": return "ラクロス";
+            case "rugbyleague": return "ラグビーリーグ";
+            case "racquetball": return "ラケットボール";
+            case "radioexercies": return "ラジオ体操";
+            case "rollerski": return "ローラースキー";
+            case "rollerskates": return "ローラースケート";
+            case "lawnbowls": return "ローンボウルズ";
+            
+            // メインスポーツ
+            case "baseball": return "野球";
+            case "soccer": return "サッカー";
+            case "judo": return "柔道";
+            case "basketball": return "バスケットボール";
+            case "swimming": return "水泳";
+            case "kendo": return "剣道";
+            case "wrestling": return "レスリング";
+            case "athletics": return "陸上競技";
+            case "tennis": return "テニス";
+            case "volleyball": return "バレーボール";
+            case "gymnastics": return "体操";
+            case "tabletennis": return "卓球";
+            case "badminton": return "バドミントン";
+            case "golf": return "ゴルフ";
+            case "boxing": return "ボクシング";
+            case "rugby": return "ラグビー";
+            case "aikido": return "合気道";
+
+            default: return sportsCode; // 見つからない場合はそのまま
         }
     }
     
