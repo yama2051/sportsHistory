@@ -1,5 +1,8 @@
 # スポーツの歴史を学ぶサイト
 
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/c4cabb30-c70b-4029-a9cc-6e94732bb8f7" />
+
+
 2025/12/30
 * 1. DB連携による参考URLの動的表示機能
   * 単一のリンク表示から、データベース（PostgreSQL）に保存されたデータを取得して動的にリスト表示する形式へアップグレードしました。
